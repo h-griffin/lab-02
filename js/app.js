@@ -1,6 +1,7 @@
 'use strict';
 
 let gallery = [];
+let defaultValue = 'page-1';
 
 function ImageGallery(image_url, title, description, keyword, horns){
     this.image_url = image_url;
@@ -10,20 +11,17 @@ function ImageGallery(image_url, title, description, keyword, horns){
     this.horns = horns;
     gallery.push(this);
 }
-
 console.log(gallery);
 
-ImageGallery.prototype.render = () => {
-    $('#body').append(`
-        <h2>${this.title}</h2>
-        <img src=${this.image_url} alt=${this.keyword}>
-        <p>${this.description}</p>
-        <p>${this.keyword}</p>
-        <p>${this.horns}</p>
-        `);
-};
-
-console.log($.ajax('data/page-1.json'));
+// ImageGallery.prototype.render = () => {
+//     $('#body').append(`
+//         <h2>${this.title}</h2>
+//         <img src=${this.image_url} alt=${this.keyword}>
+//         <p>${this.description}</p>
+//         <p>${this.keyword}</p>
+//         <p>${this.horns}</p>
+//         `);
+// };
 
 const addValuesToBody = (item) => {
     $('#photo-template').append(`
@@ -45,15 +43,29 @@ const addValuesToDropdown = () => {
     });
 };
 
-$.ajax('data/page-1.json').then(data => {
-    data.forEach( (value) => {
-        new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
+const pageTwoGallery = () => {
+    $('#photo-gallery').empty();
+    $()
+    event.preventDefault();
+    defaultValue = 'page-2';
+    callAjax(defaultValue);
+};
+$('page-2').on('click', pageTwoGallery);
+
+function callAjax(defaultValue){
+    $.ajax(`data/${defaultValue}.json`).then(data => {
+        let currentGallery = [];
+        data.forEach( (value) => {
+            let newThing = new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
+            currentGallery.push(newThing);
+        });
+        currentGallery.forEach( value => {
+            addValuesToBody(value);
+        });
+        addValuesToDropdown();
     });
-    gallery.forEach( value => {
-        addValuesToBody(value);
-    });
-    addValuesToDropdown();
-});
+}
+callAjax(defaultValue);
 
 function clickHandler(event) {
     $('.photo-article').hide();
@@ -62,4 +74,5 @@ function clickHandler(event) {
     console.log(event);
 }
 
-$('select').on('click', clickHandler);
+$('select').on('change', clickHandler);
+
