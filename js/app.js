@@ -23,20 +23,30 @@ console.log(gallery);
 //         `);
 // };
 
+// const addValuesToBody = (item) => {
+//     $('#photo-template').append(`
+//     <article class='photo-article ${item.keyword}'>
+//     <h2>${item.title}</h2>
+//     <img src=${item.image_url}>
+//      <p>${item.description}</p>
+//      <p>${item.keyword}</p>
+//      <p>${item.horns}</p>
+//     </article>
+//     `);
+// };
+
+//mustache template
 const addValuesToBody = (item) => {
-    $('#photo-template').append(`
-    <article class='photo-article ${item.keyword}'>
-    <h2>${item.title}</h2>
-    <img src=${item.image_url}>
-    <p>${item.description}</p>
-    <p>${item.keyword}</p>
-    <p>${item.horns}</p>
-    </article>
-    `);
+    let $template = $('#photo-template').html();
+    let $target = $('#main');
+
+    $target.append(Mustache.render($template, item));
 };
 
+//renderers all images in drop down
 const addValuesToDropdown = () => {
     gallery.forEach( (option) => {
+        console.log('bing bong');
         $('select').append(`
         <option value ='${option.keyword}'>${option.keyword}</option>
         `);
@@ -57,22 +67,24 @@ const pageTwoGallery = (event) => {
     $('select').empty();
     event.preventDefault();
     defaultValue = 'page-2';
-    callAjax(defaultValue);
+    callAjax();
 };
 $('#page-2').on('click', pageTwoGallery);
 
 function callAjax(){
     $.ajax(`data/${defaultValue}.json`).then(data => {
-        let currentGallery = [];
+        let gallery = [];
         data.forEach( (value) => {
             let newThing = new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
-            currentGallery.push(newThing);
+            gallery.push(newThing);
         });
-        currentGallery.forEach( value => {
+        gallery.forEach( value => {
+            gallery.push(value);
             addValuesToBody(value);
         });
         addValuesToDropdown();
     });
+    console.log('help');
 }
 callAjax(defaultValue);
 
@@ -85,5 +97,5 @@ function clickHandler(event) {
 
 $('select').on('change', clickHandler);
 
-$('#page-1').on('click', () => {callAjax()});
-$('#page-2').on('click', () => {callAjax()});
+// $('#page-1').on('click', () => {callAjax()});
+// $('#page-2').on('click', () => {callAjax()});
