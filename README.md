@@ -18,8 +18,30 @@ Number and name of feature: #1 display images
 
 Estimate of time needed to complete: 60 minutes?
 
-Start time: 10:16 am
+Start time: 10:16 am 04/08
 
-Finish time:  am
+Finish time:  11am 04/09
+
+Actual time needed to complete: 6 hours
+
+## feature 3 style
+Number and name of feature: #1 display images
+
+Estimate of time needed to complete: 60 minutes?
+
+Start time: 10:16 am 04/08
+
+Finish time:  11am 04/09
+
+Actual time needed to complete: 6 hours
+
+## feature 2.1 pagination 
+Number and name of feature: #1/4 pagination
+
+Estimate of time needed to complete: 90 minutes?
+
+Start time: 11 am
+
+Finish time:  
 
 Actual time needed to complete: 

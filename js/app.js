@@ -1,6 +1,7 @@
 'use strict';
 
 let gallery = [];
+let defaultValue = 'page-1';
 
 function ImageGallery(image_url, title, description, keyword, horns){
     this.image_url = image_url;
@@ -10,52 +11,79 @@ function ImageGallery(image_url, title, description, keyword, horns){
     this.horns = horns;
     gallery.push(this);
 }
+console.log(gallery);
 
-// ImageGallery.prototype.render = () => {
-//   $('#body').append(`
-//     <h2>${this.title}</h2>
-//     <img src=${this.image_url} alt=${this.keyword}>
-//     <p>${this.description}</p>
-//     <p>${this.keyword}</p>
-//     <p>${this.horns}</p>
-//     `);
+// ImageGallery.prototype.render = function(){
+//     $('#body').append(`
+//         <h2>${this.title}</h2>
+//         <img src=${this.image_url} alt=${this.keyword}>
+//         <p>${this.description}</p>
+//         <p>${this.keyword}</p>
+//         <p>${this.horns}</p>
+//         `);
 // };
 
-$('select').on('click', function(event) {
-    // $('#photoTemplate').hide();
-    console.log(event);
-});
-
-console.log($.ajax('data/page-1.json'));
-
 const addValuesToBody = (item) => {
-    $('#main').append(`
-        <article id='#photoTemplate>
-            <h2>${item.title}</h2>
-            <img src=${item.image_url}>
-            <p>${item.description}</p>
-            <p>${item.keyword}</p>
-            <p>${item.horns}</p>
-        </article>
-        `);
-};
-
-const addValuesToDropdown = (option) => {
-    $('select').append(`
-    <option value ='${option.keyword}'>${option.keyword}</option>
+    $('#photo-template').append(`
+    <article class='photo-article ${item.keyword}'>
+    <h2>${item.title}</h2>
+    <img src=${item.image_url}>
+    <p>${item.description}</p>
+    <p>${item.keyword}</p>
+    <p>${item.horns}</p>
+    </article>
     `);
 };
 
-$.ajax('data/page-1.json').then(data => {
-    data.forEach( (value) => {
-        new ImageGallery(value.image_url. value.title, value.description, value.keyword, value.horns);
+const addValuesToDropdown = () => {
+    gallery.forEach( (option) => {
+        $('select').append(`
+        <option value ='${option.keyword}'>${option.keyword}</option>
+        `);
     });
-    gallery.forEach( value => {
-        addValuesToBody(value);
-        addValuesToDropdown(value);
+};
+
+const pageOneGallery = (event) => {
+    $('section').empty();
+    $('select').empty();
+    event.preventDefault();
+    defaultValue = 'page-1';
+    callAjax(defaultValue);
+};
+$('#page-1').on('click', pageOneGallery);
+
+const pageTwoGallery = (event) => {
+    $('section').empty();
+    $('select').empty();
+    event.preventDefault();
+    defaultValue = 'page-2';
+    callAjax(defaultValue);
+};
+$('#page-2').on('click', pageTwoGallery);
+
+function callAjax(){
+    $.ajax(`data/${defaultValue}.json`).then(data => {
+        let currentGallery = [];
+        data.forEach( (value) => {
+            let newThing = new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
+            currentGallery.push(newThing);
+        });
+        currentGallery.forEach( value => {
+            addValuesToBody(value);
+        });
+        addValuesToDropdown();
     });
-});
+}
+callAjax(defaultValue);
 
-console.log(gallery);
+function clickHandler(event) {
+    $('.photo-article').hide();
+    let id = `.${event.target.value}`;
+    $(id).show();
+    console.log(event);
+}
 
+$('select').on('change', clickHandler);
 
+$('#page-1').on('click', () => {callAjax()});
+$('#page-2').on('click', () => {callAjax()});
