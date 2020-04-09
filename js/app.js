@@ -13,7 +13,7 @@ function ImageGallery(image_url, title, description, keyword, horns){
 }
 console.log(gallery);
 
-// ImageGallery.prototype.render = () => {
+// ImageGallery.prototype.render = function(){
 //     $('#body').append(`
 //         <h2>${this.title}</h2>
 //         <img src=${this.image_url} alt=${this.keyword}>
@@ -43,16 +43,25 @@ const addValuesToDropdown = () => {
     });
 };
 
-const pageTwoGallery = () => {
-    $('#photo-gallery').empty();
-    $()
+const pageOneGallery = (event) => {
+    $('section').empty();
+    $('select').empty();
+    event.preventDefault();
+    defaultValue = 'page-1';
+    callAjax(defaultValue);
+};
+$('#page-1').on('click', pageOneGallery);
+
+const pageTwoGallery = (event) => {
+    $('section').empty();
+    $('select').empty();
     event.preventDefault();
     defaultValue = 'page-2';
     callAjax(defaultValue);
 };
-$('page-2').on('click', pageTwoGallery);
+$('#page-2').on('click', pageTwoGallery);
 
-function callAjax(defaultValue){
+function callAjax(){
     $.ajax(`data/${defaultValue}.json`).then(data => {
         let currentGallery = [];
         data.forEach( (value) => {
@@ -76,3 +85,5 @@ function clickHandler(event) {
 
 $('select').on('change', clickHandler);
 
+$('#page-1').on('click', () => {callAjax()});
+$('#page-2').on('click', () => {callAjax()});
