@@ -11,51 +11,55 @@ function ImageGallery(image_url, title, description, keyword, horns){
     gallery.push(this);
 }
 
-// ImageGallery.prototype.render = () => {
-//   $('#body').append(`
-//     <h2>${this.title}</h2>
-//     <img src=${this.image_url} alt=${this.keyword}>
-//     <p>${this.description}</p>
-//     <p>${this.keyword}</p>
-//     <p>${this.horns}</p>
-//     `);
-// };
+console.log(gallery);
 
-$('select').on('click', function(event) {
-    // $('#photoTemplate').hide();
-    console.log(event);
-});
+ImageGallery.prototype.render = () => {
+    $('#body').append(`
+        <h2>${this.title}</h2>
+        <img src=${this.image_url} alt=${this.keyword}>
+        <p>${this.description}</p>
+        <p>${this.keyword}</p>
+        <p>${this.horns}</p>
+        `);
+};
 
 console.log($.ajax('data/page-1.json'));
 
 const addValuesToBody = (item) => {
-    $('#main').append(`
-        <article id='#photoTemplate>
-            <h2>${item.title}</h2>
-            <img src=${item.image_url}>
-            <p>${item.description}</p>
-            <p>${item.keyword}</p>
-            <p>${item.horns}</p>
-        </article>
-        `);
+    $('#photo-template').append(`
+    <article class='photo-article ${item.keyword}'>
+    <h2>${item.title}</h2>
+    <img src=${item.image_url}>
+    <p>${item.description}</p>
+    <p>${item.keyword}</p>
+    <p>${item.horns}</p>
+    </article>
+    `);
 };
 
-const addValuesToDropdown = (option) => {
-    $('select').append(`
-    <option value ='${option.keyword}'>${option.keyword}</option>
-    `);
+const addValuesToDropdown = () => {
+    gallery.forEach( (option) => {
+        $('select').append(`
+        <option value ='${option.keyword}'>${option.keyword}</option>
+        `);
+    });
 };
 
 $.ajax('data/page-1.json').then(data => {
     data.forEach( (value) => {
-        new ImageGallery(value.image_url. value.title, value.description, value.keyword, value.horns);
+        new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
     });
     gallery.forEach( value => {
         addValuesToBody(value);
-        addValuesToDropdown(value);
     });
+    addValuesToDropdown();
 });
 
-console.log(gallery);
+function clickHandler(event) {
+    $('.photo-article').hide();
+    let id = `.${event.target.value}`;
+    $(id).show();
+    console.log(event);
+}
 
-
+$('select').on('click', clickHandler);
