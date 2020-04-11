@@ -45,3 +45,14 @@ Start time: 11 am
 Finish time:  
 
 Actual time needed to complete: 
+
+## feature 2.1 pagination 
+Number and name of feature: #1/4 pagination
+
+Estimate of time needed to complete: 90 minutes?
+
+Start time: 11 am
+
+Finish time:  
+
+Actual time needed to complete: 
