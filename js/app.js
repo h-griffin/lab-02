@@ -13,28 +13,6 @@ function ImageGallery(image_url, title, description, keyword, horns){
 }
 console.log(gallery);
 
-// ImageGallery.prototype.render = function(){
-//     $('#body').append(`
-//         <h2>${this.title}</h2>
-//         <img src=${this.image_url} alt=${this.keyword}>
-//         <p>${this.description}</p>
-//         <p>${this.keyword}</p>
-//         <p>${this.horns}</p>
-//         `);
-// };
-
-// const addValuesToBody = (item) => {
-//     $('#photo-template').append(`
-//     <article class='photo-article ${item.keyword}'>
-//     <h2>${item.title}</h2>
-//     <img src=${item.image_url}>
-//      <p>${item.description}</p>
-//      <p>${item.keyword}</p>
-//      <p>${item.horns}</p>
-//     </article>
-//     `);
-// };
-
 //mustache template
 const addValuesToBody = (item) => {
     let template = $('#photo-template').html();

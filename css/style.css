@@ -2,3 +2,58 @@
 @import '../css/layout.css';
 @import '../css/module.css';
 @import '../css/reset.css';
+
+img{
+    width: 100px;
+}
+body{
+    width: 1000px;
+}
+
+header{
+    background-color: lightgray;
+    text-align: center;
+}
+main{
+    border: solid black thin;
+}
+
+h1{
+    font-family: 'Metal Mania', cursive;
+    font-size: 60px;
+    line-height: 100px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    font-family: 'Metal Mania', cursive;
+    font-size: 30px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li:hover {
+    background-color: #111;
+  }
+
+article{
+    border: solid black thin;
+    width: 200px;
+    height:400px;
+    margin: 1px;
+    float: left;
+    font-family: 'UnifrakturCook', cursive;
+    font-family: 'Girassol', cursive;
+    font-size: 20px;
+    text-align: center;
+}
