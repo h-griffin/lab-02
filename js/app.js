@@ -37,25 +37,25 @@ console.log(gallery);
 
 //mustache template
 const addValuesToBody = (item) => {
-    let $template = $('#photo-template').html();
-    let $target = $('#main');
+    let template = $('#photo-template').html();
+    let renderedTemplate = Mustache.render(template, item);
 
-    $target.append(Mustache.render($template, item));
+    $('#main').append(renderedTemplate);
 };
 
 //renderers all images in drop down
 const addValuesToDropdown = () => {
     gallery.forEach( (option) => {
-        console.log('bing bong');
-        $('select').append(`
+        $('#workpls').append(`
         <option value ='${option.keyword}'>${option.keyword}</option>
         `);
     });
 };
 
+//empty previous page and fill new images with ajax/json
 const pageOneGallery = (event) => {
-    $('section').empty();
-    $('select').empty();
+    $('#main').empty();
+    $('#workpls').empty();
     event.preventDefault();
     defaultValue = 'page-1';
     callAjax(defaultValue);
@@ -63,28 +63,26 @@ const pageOneGallery = (event) => {
 $('#page-1').on('click', pageOneGallery);
 
 const pageTwoGallery = (event) => {
-    $('section').empty();
-    $('select').empty();
+    $('#main').empty();
+    $('#workpls').empty();
     event.preventDefault();
     defaultValue = 'page-2';
-    callAjax();
+    callAjax(defaultValue);
 };
 $('#page-2').on('click', pageTwoGallery);
 
-function callAjax(){
+//pull from json
+function callAjax(defaultValue){
     $.ajax(`data/${defaultValue}.json`).then(data => {
-        let gallery = [];
+        gallery = [];
         data.forEach( (value) => {
             let newThing = new ImageGallery(value.image_url, value.title, value.description, value.keyword, value.horns);
-            gallery.push(newThing);
         });
         gallery.forEach( value => {
-            gallery.push(value);
             addValuesToBody(value);
         });
         addValuesToDropdown();
     });
-    console.log('help');
 }
 callAjax(defaultValue);
 
@@ -93,6 +91,7 @@ function clickHandler(event) {
     let id = `.${event.target.value}`;
     $(id).show();
     console.log(event);
+    console.log('click');
 }
 
 $('select').on('change', clickHandler);
