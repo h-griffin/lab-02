@@ -4,23 +4,42 @@
 @import '../css/reset.css';
 
 img{
-    width: 100px;
+    /* width: 150px; */
+    height: 110px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 body{
-    width: 1000px;
+    width: 1200px;
+    background-color: lightgray;
+    /* justify-content: center; */
+    margin:0 auto;
 }
 
 header{
     background-color: lightgray;
     text-align: center;
 }
-main{
+
+select{
     border: solid black thin;
+    background-color: white;
+    font-size: x-large;
+    padding-top: 20px;
+}
+
+option{
+    padding-top: 10px;
+}
+
+main{
+    /* border: solid black thin; */
+    margin-left: 50px;
 }
 
 h1{
     font-family: 'Metal Mania', cursive;
-    font-size: 60px;
+    font-size: 80px;
     line-height: 100px;
 }
 
@@ -30,9 +49,9 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #333;
-  }
+}
 
-  li {
+li {
     font-family: 'Metal Mania', cursive;
     font-size: 30px;
     display: inline-block;
@@ -40,20 +59,35 @@ ul {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
+}
   
-  li:hover {
+li:hover {
     background-color: #111;
-  }
+}
 
 article{
+    background-color: white;
     border: solid black thin;
-    width: 200px;
-    height:400px;
-    margin: 1px;
+    width: 250px;
+    height:350px;
     float: left;
+    justify-content: flex-start;
+    margin: 20px 0px 0px 20px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+h2{
     font-family: 'UnifrakturCook', cursive;
     font-family: 'Girassol', cursive;
     font-size: 20px;
     text-align: center;
+}
+
+p{
+    font-family: 'UnifrakturCook', cursive;
+    font-family: 'Girassol', cursive;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
 }
