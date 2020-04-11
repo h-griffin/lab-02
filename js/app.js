@@ -77,16 +77,40 @@ callAjax(defaultValue);
 //sort by title on click
 function titleClick(event){
     event.preventDefault();
-    $('.photo-template').hide();
-    let title = gallery.sort();
-    $(title).show();
+    $('main').empty();
+    sortTitle();
+    gallery.forEach( (value) => {
+        addValuesToBody(value);
+    });
     console.log('title click');
 }
 
-// const sortTitle = (gallery) => {
-//     $('#main').empty();
-//     gallery.title.sort();
-// };
+//sort alphabetically
+const sortTitle = () => {
+    gallery.sort( (a,b) => {
+        let aTitle = a.title;
+        let bTitle = b.title;
+        if (aTitle < bTitle){
+            return -1;
+        }else if(aTitle > bTitle){
+            return 1;
+        }else{
+            return 0;
+        }
+    });
+};
+$('#sortTitle').on('click', titleClick);
 
-$('sortTitle').on('click', titleClick);
-
+const sortHorn = () => {
+    gallery.sort( (a,b) => {
+        let aHorn = a.horn;
+        let bHorn = b.horn;
+        if( aHorn < bHorn){
+            return -1;
+        }else if(aHorn > bHorn){
+            return 1;
+        }else{
+            return 0;
+        }
+    });
+};
