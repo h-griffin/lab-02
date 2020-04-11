@@ -30,7 +30,7 @@ const addValuesToDropdown = () => {
     });
 };
 
-//empty previous page and fill new images with ajax/json
+//empty page and fill new images with ajax/json pages
 const pageOneGallery = (event) => {
     $('#main').empty();
     $('#workpls').empty();
@@ -49,7 +49,17 @@ const pageTwoGallery = (event) => {
 };
 $('#page-2').on('click', pageTwoGallery);
 
-//pull from json
+//filter by keyword
+//hide mustache template / event.target is select .value is option /
+function clickHandler(event) {
+    $('.photo-article').hide();
+    let id = `.${event.target.value}`;
+    $(id).show();
+}
+//change AFTER different option is selected from dropdown
+$('select').on('change', clickHandler);
+
+//pull from json / images
 function callAjax(defaultValue){
     $.ajax(`data/${defaultValue}.json`).then(data => {
         gallery = [];
@@ -64,15 +74,19 @@ function callAjax(defaultValue){
 }
 callAjax(defaultValue);
 
-function clickHandler(event) {
-    $('.photo-article').hide();
-    let id = `.${event.target.value}`;
-    $(id).show();
-    console.log(event);
-    console.log('click');
+//sort by title on click
+function titleClick(event){
+    event.preventDefault();
+    $('.photo-template').hide();
+    let title = gallery.sort();
+    $(title).show();
+    console.log('title click');
 }
 
-$('select').on('change', clickHandler);
+// const sortTitle = (gallery) => {
+//     $('#main').empty();
+//     gallery.title.sort();
+// };
 
-// $('#page-1').on('click', () => {callAjax()});
-// $('#page-2').on('click', () => {callAjax()});
+$('sortTitle').on('click', titleClick);
+

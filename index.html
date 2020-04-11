@@ -16,21 +16,25 @@
         <nav>
             <ul>
                 <li id='page-1'>page 1</li>
-                <li id='page-2'>page 2</li>
+                <li id='page-2'>page 2</li> <br>
+                <li id='sortTitle'>sort by title</li>
+                <li>
+                    <select id='workpls'>
+                        <option value='default'>Filter by Keyword</option>
+                    </select>
+                </li>
+                <li id='sortHorn'>sort by horns</li>
             </ul>
         </nav>
-        <select id='workpls'>
-            <option value='default'>Filter by Keyword</option>
-            <script id='photo-template' type='text/x-tmpl-mustache'>
-                <article class='photo-article {{keyword}}'>
-                    <h2>{{title}}</h2>
-                    <img src='{{image_url}}' alt='{{title}}'>
-                    <p>{{description}}</p>
-                    <p>{{keyword}}</p>
-                    <p>{{horns}}</p>
-                </article>
-            </script>
-        </select>
+        <script id='photo-template' type='text/x-tmpl-mustache'>
+            <article class='photo-article {{keyword}}'>
+                <h2>{{title}}</h2>
+                <img src='{{image_url}}' alt='{{title}}'>
+                <p>{{description}}</p>
+                <p>{{keyword}}</p>
+                <p>Horns: {{horns}}</p>
+            </article>
+        </script>
     </header>
     <main id='main'>
     </main>
