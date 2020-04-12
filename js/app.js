@@ -74,19 +74,56 @@ function callAjax(defaultValue){
 }
 callAjax(defaultValue);
 
+
+//sort alphabetically
+const sortTitle = () => {
+    gallery.sort( (a,b) => {
+        let aTitle = a.title;
+        let bTitle = b.title;
+        if (aTitle < bTitle){
+            return -1;
+        }else if(aTitle > bTitle){
+            return 1;
+        }else{
+            return 0;
+        }
+    });
+};
+
 //sort by title on click
 function titleClick(event){
     event.preventDefault();
-    $('.photo-template').hide();
-    let title = gallery.sort();
-    $(title).show();
+    $('main').empty();
+    sortTitle();
+    gallery.forEach( (value) => {
+        addValuesToBody(value);
+    });
     console.log('title click');
 }
+$('#sortTitle').on('click', titleClick);
 
-// const sortTitle = (gallery) => {
-//     $('#main').empty();
-//     gallery.title.sort();
-// };
+//sort by number of horn
+const sortHorn = () => {
+    gallery.sort( (a,b) => {
+        let aHorn = a.horns;
+        let bHorn = b.horns;
+        if( aHorn < bHorn){
+            return -1;
+        }else if(aHorn > bHorn){
+            return 1;
+        }else{
+            return 0;
+        }
+    });
+};
 
-$('sortTitle').on('click', titleClick);
-
+function hornClick(event){
+    event.preventDefault();
+    $('main').empty();
+    sortHorn();
+    gallery.forEach( (value) => {
+        addValuesToBody(value);
+    });
+    console.log('horn click');
+}
+$('#sortHorn').on('click', hornClick);
