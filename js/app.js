@@ -74,16 +74,6 @@ function callAjax(defaultValue){
 }
 callAjax(defaultValue);
 
-//sort by title on click
-function titleClick(event){
-    event.preventDefault();
-    $('main').empty();
-    sortTitle();
-    gallery.forEach( (value) => {
-        addValuesToBody(value);
-    });
-    console.log('title click');
-}
 
 //sort alphabetically
 const sortTitle = () => {
@@ -99,12 +89,24 @@ const sortTitle = () => {
         }
     });
 };
+
+//sort by title on click
+function titleClick(event){
+    event.preventDefault();
+    $('main').empty();
+    sortTitle();
+    gallery.forEach( (value) => {
+        addValuesToBody(value);
+    });
+    console.log('title click');
+}
 $('#sortTitle').on('click', titleClick);
 
+//sort by number of horn
 const sortHorn = () => {
     gallery.sort( (a,b) => {
-        let aHorn = a.horn;
-        let bHorn = b.horn;
+        let aHorn = a.horns;
+        let bHorn = b.horns;
         if( aHorn < bHorn){
             return -1;
         }else if(aHorn > bHorn){
@@ -114,3 +116,14 @@ const sortHorn = () => {
         }
     });
 };
+
+function hornClick(event){
+    event.preventDefault();
+    $('main').empty();
+    sortHorn();
+    gallery.forEach( (value) => {
+        addValuesToBody(value);
+    });
+    console.log('horn click');
+}
+$('#sortHorn').on('click', hornClick);
